@@ -16,6 +16,10 @@ The gem_simulator is built for Polaris GEM e2 simulation in Gazebo & Rviz using 
 
 ### Demo:
 
+$ roslaunch gem_gazebo gem_vehicle.launch  
+
+$ rostopic pub /ackermann_cmd ackermann_msgs/AckermannDrive "{steering_angle: 0.0, steering_angle_velocity: 0.0, speed: 15.0, acceleration: 0.0, jerk: 0.0}"  
+
 Click the video below.  
 
 [![](http://img.youtube.com/vi/QQeMYGaLNcU/0.jpg)](http://www.youtube.com/watch?v=QQeMYGaLNcU "Go Straight ")  
