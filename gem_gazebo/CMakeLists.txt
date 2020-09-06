@@ -14,11 +14,11 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package()
 
-catkin_install_python(PROGRAMS scripts/gem_control.py
-                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+catkin_install_python(PROGRAMS
+  scripts/gem_control.py
+  scripts/gem_sensor_info.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
-catkin_install_python(PROGRAMS scripts/gem_sensor_info.py
-                      DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-
-install(DIRECTORY config launch
+install(DIRECTORY config launch media models worlds
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
