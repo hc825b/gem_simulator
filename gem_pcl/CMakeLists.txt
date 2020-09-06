@@ -12,7 +12,10 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
 )
 
-find_package(PCL REQUIRED)
+find_package(PCL REQUIRED COMPONENTS
+  common
+  filters
+)
 
 ## Add include directories
 include_directories(include
@@ -35,22 +38,4 @@ include_directories(
 
 add_executable(gem_velodyne src/gem_velodyne.cpp)
 target_link_libraries(gem_velodyne ${catkin_LIBRARIES} ${PCL_LIBRARIES})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
