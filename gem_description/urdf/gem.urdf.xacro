@@ -166,7 +166,7 @@
 
 
   <joint name="top_rack_joint" type="fixed">
-    <origin xyz="-0.10172 0.6575 1.3921" rpy="1.5708 0 3.1416" />
+    <origin xyz="-0.10172 0.6575 1.3921" rpy="${pi/2} 0 ${pi}" />
     <parent link="base_link" />
     <child link="top_rack_link" />
     <axis xyz="0 0 0" />
@@ -206,7 +206,7 @@
 
 
   <joint name="front_rack_joint" type="fixed">
-    <origin xyz="1.352 0 -0.30594" rpy="1.5708 0 1.5708" />
+    <origin xyz="1.352 0 -0.30594" rpy="${pi/2} 0 ${pi/2}" />
     <parent link="base_link" />
     <child link="front_rack_link" />
     <axis xyz="0 0 0" />
@@ -246,7 +246,7 @@
 
 
   <joint name="rear_rack_joint" type="fixed">
-    <origin xyz="-1.302 0 -0.27168" rpy="1.5708 0 -1.5708" />
+    <origin xyz="-1.302 0 -0.27168" rpy="${pi/2} 0 ${-pi/2}" />
     <parent link="base_link" />
     <child link="rear_rack_link" />
     <axis xyz="0 0 0" />
@@ -995,7 +995,7 @@
   </link>
 
   <joint name="front_camera_joint" type="fixed">
-    <origin xyz="0.16 -0.11 1.1063" rpy="1.5708 0 -3.1416" />
+    <origin xyz="0.16 -0.11 1.1063" rpy="${pi/2} 0 ${-pi}" />
     <parent link="base_link" />
     <child link="front_camera_link" />
     <axis xyz="0 0 0"/>
@@ -1025,7 +1025,7 @@
 
 
   <joint name="rear_light_bar_joint" type="fixed">
-    <origin xyz="-0.64921 0 0.76944" rpy="-1.9138 0 1.5708" />
+    <origin xyz="-0.64921 0 0.76944" rpy="-1.9138 0 ${pi/2}" />
     <parent link="base_link" />
     <child link="rear_light_bar_link" />
     <axis xyz="0 0 0" />
@@ -1205,7 +1205,7 @@
   <!-- *********************************************** Sensors ************************************************ -->
 
   <xacro:VLP-16 parent="top_rack_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" gpu="false">
-    <origin xyz="0.02 0.115 -0.6575" rpy="1.5708 0 3.1416" /> <!-- 1.5708 3.1416 -->
+    <origin xyz="0.02 0.115 -0.6575" rpy="${pi/2} 0 ${pi}" />
   </xacro:VLP-16>
 
   <link name="front_single_camera_link">
@@ -1230,7 +1230,7 @@
   </link>
 
   <joint name="gem_front_camera_joint" type="fixed">
-    <origin xyz="-0.045 0 0" rpy="-1.5708 3.1416 0"/>
+    <origin xyz="-0.045 0 0" rpy="${-pi/2} ${pi} 0"/>
     <parent link="front_camera_link"/>
     <child link="front_single_camera_link"/>
   </joint>
@@ -1259,7 +1259,7 @@
 
 
   <joint name="gem_stereo_camera_joint" type="fixed">
-    <origin xyz="-0.045 0 0" rpy="-1.5708 3.1416 0"/>
+    <origin xyz="-0.045 0 0" rpy="${-pi/2} ${pi} 0"/>
     <parent link="front_camera_link"/>
     <child link="stereo_camera_link"/>
   </joint>
@@ -1295,7 +1295,7 @@
   </link>
 
   <joint name="IMU_joint" type="fixed">
-    <origin xyz="-0.246 0 0.05" rpy="0 0 -1.5708"/>
+    <origin xyz="-0.246 0 0.05" rpy="0 0 ${-pi/2}"/>
     <parent link="base_link"/>
     <child link="IMU_link"/>
   </joint>
@@ -1359,7 +1359,7 @@
 
 
   <joint name="front_sonar_joint" type="fixed">
-    <origin xyz="0 0.38 0.065" rpy="0 -1.5708 -1.5708"/>
+    <origin xyz="0 0.38 0.065" rpy="0 ${-pi/2} ${-pi/2}"/>
     <parent link="front_rack_link"/>
     <child link="front_sonar_link"/>
   </joint>
@@ -1387,7 +1387,7 @@
   </link>
 
   <joint name="rear_sonar_joint" type="fixed">
-    <origin xyz="0 0.38 0.065" rpy="0 -1.5708 -1.5708"/>
+    <origin xyz="0 0.38 0.065" rpy="0 ${-pi/2} ${-pi/2}"/>
     <parent link="rear_rack_link"/>
     <child link="rear_sonar_link"/>
   </joint>
