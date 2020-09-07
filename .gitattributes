@@ -1,0 +1,41 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+.gitignore text
+Makefile text
+LICENSE text
+*.c text diff=c
+*.h text diff=c
+*.cpp text diff=cpp
+*.hpp text diff=cpp
+*.py text diff=python
+*.bash
+*.sh
+*.xml text
+*.yaml text
+*.yml text
+*.md text diff=markdown
+*.rst text
+*.txt text
+
+# ROS + Gazebo
+*.msg text
+*.srv text
+*.gazebo text
+*.launch text
+*.xacro text
+*.test text
+*.sdf text
+*.urdf text
+*.world text
+
+# Declare files that will always have CRLF line endings on checkout.
+*.bat text eol=crlf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+*.pdf binary
+
