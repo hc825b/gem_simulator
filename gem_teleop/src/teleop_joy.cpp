@@ -37,7 +37,7 @@ TeleopGEM::TeleopGEM() : accel_(5), brake_(2), angular_(0), start_(7), back_(6),
 
 
 	// vel_pub_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1);
-	vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDrive>("/ackermann_cmd", 10);
+	vel_pub_ = nh_.advertise<ackermann_msgs::AckermannDrive>("ackermann_cmd", 10);
 	joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 100, &TeleopGEM::joyCallback, this);
 
 }

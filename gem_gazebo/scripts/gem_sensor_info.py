@@ -16,10 +16,11 @@ from sensor_msgs.msg import NavSatFix
 from cv_bridge import CvBridge, CvBridgeError
 
 
-PI = 3.1415926535
+PI = np.pi
 
 # 30Hz
 SPIN_RATE = 15 
+
 
 class ImageConverter:
 
@@ -27,9 +28,9 @@ class ImageConverter:
 
         self.bridge = CvBridge()
 
-        self.image_sensor_pub = rospy.Publisher("/gem/sensor_image", Image, queue_size=10)
-        self.image_sub        = rospy.Subscriber("/gem/front_single_camera/front_single_camera/image_raw", Image, self.image_callback)
-        self.gps_sub          = rospy.Subscriber("/gps/fix", NavSatFix, self.gps_callback)
+        self.image_sensor_pub = rospy.Publisher("sensor_image", Image, queue_size=10)
+        self.image_sub        = rospy.Subscriber("front_single_camera/image_raw", Image, self.image_callback)
+        self.gps_sub          = rospy.Subscriber("gps/fix", NavSatFix, self.gps_callback)
 
         self.gps_msg          = NavSatFix()
         self.loop_rate        = rospy.Rate(SPIN_RATE)
@@ -46,13 +47,12 @@ class ImageConverter:
 
         # Check if ROS is ready for operation
         while(rospy.is_shutdown()):
-        	print("ROS is shutdown!")
-
+            print("ROS is shutdown!")
 
     def image_callback(self, data):
 
         try:
-		  # Convert ROS image to OpenCV image
+            # Convert ROS image to OpenCV image
             raw_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
         except CvBridgeError as e:
             print(e)
@@ -68,45 +68,41 @@ class ImageConverter:
         out_img = cv2.putText(out_img, lon, self.org_lon, self.font, self.fontScale, self.color, self.thickness, cv2.LINE_AA) 
 
         try:
-		  # Convert OpenCV image to ROS image and publish
+            # Convert OpenCV image to ROS image and publish
             self.image_sensor_pub.publish(self.bridge.cv2_to_imgmsg(out_img, "bgr8"))
         except CvBridgeError as e:
             print(e)
 
-
     def gps_callback(self, data):
-    	self.latitude  = round(data.latitude, 6)
-    	self.longitude = round(data.longitude, 6)
+        self.latitude  = round(data.latitude, 6)
+        self.longitude = round(data.longitude, 6)
 
 
-
-
-
-"""
-Program run from here
-"""
 def main():
+    """
+    Program run from here
+    """
 
-	# Initialize ROS node
-	rospy.init_node('gem_sensor_image')
+    # Initialize ROS node
+    rospy.init_node('gem_sensor_image')
 
-	# Check if ROS is ready for operation
-	while(rospy.is_shutdown()):
-		rospy.loginfo("ROS is shutdown!")
+    # Check if ROS is ready for operation
+    while(rospy.is_shutdown()):
+        rospy.loginfo("ROS is shutdown!")
 
-	# Initialize the rate to publish to ur3/command
-	loop_rate = rospy.Rate(SPIN_RATE)
+    # Initialize the rate to publish to ur3/command
+    loop_rate = rospy.Rate(SPIN_RATE)
 
-	ic_sensor = ImageConverter(SPIN_RATE)
+    ic_sensor = ImageConverter(SPIN_RATE)
 
-	rospy.loginfo("Use Ctrl+C to exit program")
+    rospy.loginfo("Use Ctrl+C to exit program")
 
-	rospy.spin()
+    rospy.spin()
+
 
 if __name__ == '__main__':
-	
-	try:
-		main()
+    try:
+        main()
     # When Ctrl+C is executed, it catches the exception
-	except rospy.ROSInterruptException:
-		pass
+    except rospy.ROSInterruptException:
+        pass

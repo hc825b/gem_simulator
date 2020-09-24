@@ -21,17 +21,16 @@ class ImageConverter:
 
         self.bridge = CvBridge()
 
-        # Initialize publisher for /ackermann_cmd with buffer size of 1
         self.ackermann_pub = \
-            rospy.Publisher('/ackermann_cmd', AckermannDrive, queue_size=10)
+            rospy.Publisher('ackermann_cmd', AckermannDrive, queue_size=10)
         self.image_pub = \
-            rospy.Publisher("/gem/front_single_camera/front_single_camera/image_processed",
+            rospy.Publisher("front_single_camera/image_processed",
                             Image, queue_size=10)
         self.image_pub_debug = \
-            rospy.Publisher("/gem/front_single_camera/front_single_camera/image_debug",
+            rospy.Publisher("front_single_camera/image_debug",
                             Image, queue_size=10)
         self.image_sub = \
-            rospy.Subscriber("/gem/front_single_camera/front_single_camera/image_raw",
+            rospy.Subscriber("front_single_camera/image_raw",
                              Image, self.image_callback)
 
         """

@@ -188,6 +188,20 @@
 
   <!-- **************************************** Need Modification Below *********************************************** -->
 
+  <!-- ground truth model state (pose and twist w.r.t world) -->
+  <gazebo>
+    <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>30.0</updateRate>
+      <bodyName>base_footprint</bodyName>
+      <topicName>ground_truth/state</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>world</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+
   <!-- camera -->
   <gazebo reference="front_single_camera_link">
     <sensor type="camera" name="front_single_camera_sensor">
@@ -212,9 +226,9 @@
       <plugin name="front_single_camera_controller" filename="libgazebo_ros_camera.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>0.0</updateRate>
-        <cameraName>gem/front_single_camera</cameraName>
-        <imageTopicName>front_single_camera/image_raw</imageTopicName>
-        <cameraInfoTopicName>gem/front_single_camera/camera_info</cameraInfoTopicName>
+        <cameraName>front_single_camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
         <frameName>front_single_camera_link</frameName>
         <hackBaseline>0.07</hackBaseline>
         <distortionK1>0.0</distortionK1>
@@ -245,8 +259,8 @@
     <updateRate>5.0</updateRate>
     <bodyName>GPS_link</bodyName>
     <frameId>GPS_link</frameId>
-    <topicName>/gps/fix</topicName>
-    <velocityTopicName>/gps/fix_velocity</velocityTopicName>
+    <topicName>gps/fix</topicName>
+    <velocityTopicName>gps/fix_velocity</velocityTopicName>
     <referenceLatitude>-30.06022459407145675</referenceLatitude>
     <referenceLongitude>-51.173913575780311191</referenceLongitude>
     <referenceHeading>90</referenceHeading>
@@ -293,7 +307,7 @@
       </ray>
       <plugin name="gazebo_ros_sonar_controller" filename="libhector_gazebo_ros_sonar.so">
         <gaussianNoise>0.005</gaussianNoise>
-        <topicName>/front_sonar_distance</topicName>
+        <topicName>front_sonar_distance</topicName>
         <frameId>front_sonar_link</frameId>
       </plugin>
     </sensor>
@@ -329,7 +343,7 @@
       </ray>
       <plugin name="gazebo_ros_sonar_controller" filename="libhector_gazebo_ros_sonar.so">
         <gaussianNoise>0.005</gaussianNoise>
-        <topicName>/rear_sonar_distance</topicName>
+        <topicName>rear_sonar_distance</topicName>
         <frameId>rear_sonar_link</frameId>
       </plugin>
     </sensor>
@@ -395,25 +409,4 @@
 
 
 </robot>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

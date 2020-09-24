@@ -12,7 +12,7 @@ from std_msgs.msg import Float64
 from controller_manager_msgs.srv import ListControllers
 
 
-PI = 3.141592653589739
+PI = np.pi
 
 
 def get_steer_angle(phi):
@@ -175,7 +175,7 @@ class GEMController(object):
     def get_link_position(self, tfl, link):
         while True:
             try:
-                trans, not_used = tfl.lookupTransform(self.right_rear_link, link, rospy.Time(0))
+                trans, _ = tfl.lookupTransform(self.right_rear_link, link, rospy.Time(0))
                 return np.array(trans)
             except:
                 pass
@@ -227,8 +227,3 @@ class GEMController(object):
 if __name__ == "__main__":
     controller = GEMController()
     controller.spin()
-
-
-
-
-

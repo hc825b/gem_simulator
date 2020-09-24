@@ -299,7 +299,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /gem/front_single_camera/front_single_camera/image_raw
+      Image Topic: front_single_camera/image_raw
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -330,7 +330,7 @@ Visualization Manager:
       Enabled: true
       Name: Range
       Queue Size: 100
-      Topic: /front_sonar_distance
+      Topic: front_sonar_distance
       Unreliable: false
       Value: true
     - Alpha: 0.5
@@ -340,12 +340,12 @@ Visualization Manager:
       Enabled: true
       Name: Range
       Queue Size: 100
-      Topic: /rear_sonar_distance
+      Topic: rear_sonar_distance
       Unreliable: false
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /gem/sensor_image
+      Image Topic: sensor_image
       Max Value: 1
       Median window: 5
       Min Value: 0
