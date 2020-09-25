@@ -53,11 +53,11 @@ class GEMController(object):
 
         self.last_cmd_time = rospy.get_time()
 
-        tfl = tf.TransformListener() 
+        tfl = tf.TransformListener()
 
-        ls = self.get_link_position(tfl, left_steer_link) 
+        ls = self.get_link_position(tfl, left_steer_link)
 
-        rs = self.get_link_position(tfl, right_steer_link) 
+        rs = self.get_link_position(tfl, right_steer_link)
 
         lrw= self.get_link_position(tfl, left_rear_link)
 
@@ -73,17 +73,17 @@ class GEMController(object):
 
         self.ackermann_cmd_lock = threading.Lock()
 
-        self.steer_ang             = 0.0   
-        self.steer_ang_vel         = 0.0   
+        self.steer_ang             = 0.0
+        self.steer_ang_vel         = 0.0
         self.speed                 = 0.0
-        self.accel                 = 0.0   
-        self.last_steer_ang        = 0.0   
-        self.theta_left            = 0.0   
+        self.accel                 = 0.0
+        self.last_steer_ang        = 0.0
+        self.theta_left            = 0.0
         self.theta_left_old        = 0.0
         self.theta_right           = 0.0
-        self.theta_right_old       = 0.0   
+        self.theta_right_old       = 0.0
         self.last_speed            = 0.0
-        self.last_accel_limit      = 0.0   
+        self.last_accel_limit      = 0.0
         self.left_front_ang_vel    = 0.0
         self.right_front_ang_vel   = 0.0
         self.left_rear_ang_vel     = 0.0
@@ -215,7 +215,7 @@ class GEMController(object):
             self.last_speed = veh_speed
             left_dist = center_y - self.steer_joint_dist_div_2
             right_dist = center_y + self.steer_joint_dist_div_2
-            gain = (2 * PI) * veh_speed / abs(center_y) 
+            gain = (2 * PI) * veh_speed / abs(center_y)
             r = math.sqrt(left_dist ** 2 + self.wheelbase_sqr)
             self.left_front_ang_vel = gain * r * self.left_front_inv_circ
             r = math.sqrt(right_dist ** 2 + self.wheelbase_sqr)
