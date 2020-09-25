@@ -15,9 +15,9 @@ class SubscribeVelodyne {
 
 	    SubscribeVelodyne() {
 
-	        this->subscriber = this->nh.subscribe("/velodyne_points", 5, &SubscribeVelodyne::processPCL, this);
+	        this->subscriber = this->nh.subscribe("velodyne_points", 5, &SubscribeVelodyne::processPCL, this);
 	        
-	        this->publisher = this->nh.advertise<sensor_msgs::PointCloud2>("/velodyne_filtered", 1);
+	        this->publisher = this->nh.advertise<sensor_msgs::PointCloud2>("velodyne_filtered", 1);
 	    }
 	    
 		void processPCL(const sensor_msgs::PointCloud2& cloud_msg) {

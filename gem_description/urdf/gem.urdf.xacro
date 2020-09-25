@@ -1204,7 +1204,7 @@
 
   <!-- *********************************************** Sensors ************************************************ -->
 
-  <xacro:VLP-16 parent="top_rack_link" name="velodyne" topic="/velodyne_points" hz="10" samples="440" gpu="false">
+  <xacro:VLP-16 parent="top_rack_link" name="velodyne" topic="velodyne_points" hz="10" samples="440" gpu="false">
     <origin xyz="0.02 0.115 -0.6575" rpy="${pi/2} 0 ${pi}" />
   </xacro:VLP-16>
 
