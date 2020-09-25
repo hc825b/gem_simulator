@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Vehicle initial pose -->
+    <arg name="x" default="0.0"/>
+    <arg name="y" default="0.0"/>
+    <arg name="z" default="0.0"/>
+    <arg name="yaw" default="0.0"/>
+
+    <arg name="cmd_timeout" default="0.5" doc="Ackermann steering command timeout"/>
+    <arg name="publish_frequency" default="30.0" doc="Publish frequency for robot_state_publisher"/>
+
+
+    <!-- Spawn GEM car -->
+    <!-- Load model description to `robot_description` parameter -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find gem_description)/urdf/gem.urdf.xacro'"/>
+    <!-- Spawn GEM model using "robot_description" parameter -->
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-param robot_description -model gem -urdf -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw)"/>
+
+
+    <!-- Load the joint controllers. One of these publishes the joint states to `joint_states`. -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen"
+          args="$(find gem_gazebo)/config/gem_joint_control_params.yaml"/>
+
+
+    <!-- Convert joint states to TF transforms for Ackermann controller -->
+    <!-- Read joint positions from `joint_states`, then publish the vehicle's state to `tf`. -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="$(arg publish_frequency)"/>
+    </node>
+
+
+    <!-- Control the steering, axle joints. -->
+    <node name="ackermann_controller" pkg="gem_gazebo" type="gem_control.py" output="screen">
+      <param name="cmd_timeout" value="$(arg cmd_timeout)"/>
+      <rosparam file="$(find gem_gazebo)/config/gem_ackermann_control_params.yaml" command="load"/>
+    </node>
+</launch>
